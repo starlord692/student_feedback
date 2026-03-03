@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #d53369, #daae51);
+    }
+
+    .reg-box {
+        width: 400px;
+        padding: 30px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #222;
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 20px;
+        border-radius: 8px;
+        border: 1px solid #bbb;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background: #d53369;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #b52c57;
+    }
+
+    .error {
+        color: red;
+        font-size: 13px;
+        margin-top: -15px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .link {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .link a {
+        color: #d53369;
+        font-weight: 600;
+        text-decoration: none;
+    }
+</style>
+</head>
+
+<body>
+<div class="reg-box">
+    <h2>Create Account</h2>
+
+    <form id="regForm">
+
+        <label>First Name</label>
+        <input type="text" id="fname">
+        <span class="error" id="fnameErr"></span>
+
+        <label>Last Name</label>
+        <input type="text" id="lname">
+        <span class="error" id="lnameErr"></span>
+
+        <label>Email</label>
+        <input type="email" id="email">
+        <span class="error" id="emailErr"></span>
+
+        <label>Username</label>
+        <input type="text" id="username">
+        <span class="error" id="userErr"></span>
+
+        <label>Password</label>
+        <input type="password" id="password">
+        <span class="error" id="passErr"></span>
+
+        <label>Class</label>
+        <select id="class">
+            <option value="">Select Class</option>
+            <option value="MCA">MCA</option>
+            <option value="INTMCA">INTMCA</option>
+            <option value="BCA">BCA</option>
+        </select>
+        <span class="error" id="classErr"></span>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="link">
+        <a href="login.html">Already have an account?</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+    $("#regForm").submit(function(e){
+        e.preventDefault();
+
+        let fname = $("#fname").val().trim();
+        let lname = $("#lname").val().trim();
+        let email = $("#email").val().trim();
+        let username = $("#username").val().trim();
+        let pass = $("#password").val().trim();
+        let cls = $("#class").val();
+
+        let valid = true;
+        $(".error").text("");
+
+        if(fname === ""){
+            $("#fnameErr").text("First name required");
+            valid = false;
+        }
+        if(lname === ""){
+            $("#lnameErr").text("Last name required");
+            valid = false;
+        }
+        if(email === ""){
+            $("#emailErr").text("Email required");
+            valid = false;
+        }
+
+        if(username === ""){
+            $("#userErr").text("Username required");
+            valid = false;
+        } else if(/\d/.test(username)){
+            $("#userErr").text("Username must not contain numbers");
+            valid = false;
+        }
+
+        let passPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{6,}$/;
+
+        if(pass === ""){
+            $("#passErr").text("Password required");
+            valid = false;
+        } else if(!passPattern.test(pass)){
+            $("#passErr").text("Password must include letter, number, special character");
+            valid = false;
+        }
+
+        if(cls === ""){
+            $("#classErr").text("Please select a class");
+            valid = false;
+        }
+
+        // Redirect to login after successful registration
+        if(valid){
+            alert("Registration Successful!");
+            window.location.href = "login.html";
+        }
+    });
+
+});
+</script>
+</body>
+</html>

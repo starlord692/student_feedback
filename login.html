@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #4e73df, #1cc88a);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .login-box {
+        width: 350px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        color: white;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background: #1c1c1c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    .error {
+        color: yellow;
+        font-size: 13px;
+        margin: -5px 0 5px 0;
+    }
+
+    .link {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .link a {
+        color: #fff;
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+<div class="login-box">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username">
+        <div class="error" id="userErr"></div>
+
+        <input type="password" id="password" placeholder="Password">
+        <div class="error" id="passErr"></div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="link">
+        <a href="register.html">Create an account</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $("#loginForm").submit(function(e){
+        e.preventDefault();
+
+        let user = $("#username").val().trim();
+        let pass = $("#password").val().trim();
+        let valid = true;
+
+        $(".error").text("");
+
+        if(user === ""){
+            $("#userErr").text("Username required");
+            valid = false;
+        }
+
+        if(pass === ""){
+            $("#passErr").text("Password required");
+            valid = false;
+        }
+
+        if(valid){
+            alert("Login Successful!");
+        }
+    });
+});
+</script>
+</body>
+</html>
